@@ -32,14 +32,14 @@
 			<ul class="nav">
 				<li class="active" onclick="changeNav(this,1);changeiframe('/welcome')">
 					<div onclick="showMenu(1)">
-						<img src="../static/img/1_active.png" class="tip"/>系统首页
+						<img src="../../static/img/1_active.png" class="tip"/>系统首页
 					</div>
 				</li>
 				{%- for obj in tree %}
 					{%- if obj['levels'] == '2' and obj['code'] != 'home' %}
 						<li onclick="changeNav(this,{{obj['index']}})">
 							<div onclick="showMenu({{obj['index']}})">
-								<img src="../static/img/2.png" class="tip"/>{{obj['name']}}<img src="../static/img/secondNav0.png" class="open"/>
+								<img src="../../static/img/2.png" class="tip"/>{{obj['name']}}<img src="../../static/img/secondNav0.png" class="open"/>
 							</div>
 							<ul class="second-nav" id="ul{{obj['index']}}">
 								{%- for obj_c in tree %}
