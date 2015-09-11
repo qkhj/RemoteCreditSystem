@@ -140,7 +140,8 @@
 				return;
 			}
 			var url = "/parameter/autoChild/"+p_id;
-			$.ajax({
+			if(window.confirm('你确定要删除吗？')){
+				$.ajax({
 				url : url,
 				type : "get",
 				success : function(data) {
@@ -150,7 +151,9 @@
 						window.location.reload();
 					}
 				}
-			});
+				});
+			}
+			
 		}
 		function editNode(){
 			if(p_id==0){

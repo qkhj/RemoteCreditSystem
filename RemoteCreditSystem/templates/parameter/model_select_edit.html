@@ -54,6 +54,12 @@
 			//前端验证
 			$('#form_id').validationEngine();
 			$("#id_save_button").click(function() {
+				//先判断是否重名
+				var checkName = doubleName();
+				if(checkName=="Success"){
+					alert("同节点下重名，请重新命名!");
+					return;
+				}
 				if(!submitFlag){
 					alert("正在处理，请勿重复提交!");
 					return;
@@ -70,11 +76,26 @@
 			});
 
 			$("#id_delete_button").click(function() {
-				$('#form_id').attr("action","/parameter/edit_select_delete/{{select.id}}");
-				$('#form_id').submit();
+				if(window.confirm('你确定要删除吗？')){
+					$('#form_id').attr("action","/parameter/edit_select_delete/{{select.id}}");
+					$('#form_id').submit();
+				}
 			
 			});
 		});
+		function doubleName(){
+			var check = false;
+			var url = "/parameter/doubleName/{{select.tree_id}}/2/{{select.id}}/"+$("#name").val();
+			$.ajax({
+				url : url,
+				async: false,
+				type : "get",
+				success : function(data) {
+					check = data.result;
+				}
+			});
+			return check;
+		}
 	</script>
 </body>
 </html>

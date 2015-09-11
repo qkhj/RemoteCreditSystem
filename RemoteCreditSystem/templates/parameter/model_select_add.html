@@ -54,7 +54,11 @@
 			$('#form_id').validationEngine();
 			$("#id_save_button").click(function() {
 				//先判断是否重名
-				// doubleName();
+				var checkName = doubleName();
+				if(checkName=="Success"){
+					alert("同节点下重名，请重新命名!");
+					return;
+				}
 				if(!submitFlag){
 					alert("正在处理，请勿重复提交!");
 					return;
@@ -72,15 +76,17 @@
 		});
 
 		function doubleName(){
-			
-			var url = "/parameter/doubleName/{{p_id}}/1/"+$("#name").val();
+			var check = false;
+			var url = "/parameter/doubleName/{{p_id}}/2/add/"+$("#name").val();
 			$.ajax({
 				url : url,
+				async: false,
 				type : "get",
 				success : function(data) {
-					
+					check = data.result;
 				}
 			});
+			return check;
 		}
 	</script>
 </body>
