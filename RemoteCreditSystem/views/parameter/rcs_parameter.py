@@ -200,21 +200,39 @@ def autoChild(p_id):
 		return "true"
 
 #同级下重名判断
-@app.route('/parameter/doubleName/<int:p_id>/<operate_type>/<int:type>/<name>', methods=['GET'])
-def doubleName(p_id,operate_type,type,name):
+@app.route('/parameter/doubleName/<int:p_id>/<int:type>/<operate_type>/<name>', methods=['GET'])
+def doubleName(p_id,type,operate_type,name):
 	#模型项
 	if type==1:
-		tree = Rcs_Parameter_Tree.query.filter_by(pId=p_id,name=name).all()
-		for obj in tree:
-			if name==obj.name:
-				return helpers.show_result_success("")
+		if operate_type=='add':
+			tree = Rcs_Parameter_Tree.query.filter_by(pId=p_id).all()
+			for obj in tree:
+				if name==obj.name:
+					return helpers.show_result_success("")
+			else:
+				return helpers.show_result_fail("")
 		else:
-			return helpers.show_result_fail("")
+			tree_id=operate_type
+			tree = Rcs_Parameter_Tree.query.filter_by(pId=p_id).all()
+			for obj in tree:
+				if name==obj.name and str(tree_id)!=str(obj.id):
+					return helpers.show_result_success("")
+			else:
+				return helpers.show_result_fail("")
 	#模型值
 	else:
-		select = Rcs_Parameter_Select.query.filter_by(tree_id=p_id).all()
-		for obj in select:
-			if name==obj.name:
-				return helpers.show_result_success("")
+		if operate_type=='add':
+			select = Rcs_Parameter_Select.query.filter_by(tree_id=p_id).all()
+			for obj in select:
+				if name==obj.name:
+					return helpers.show_result_success("")
+			else:
+				return helpers.show_result_fail("")
 		else:
-			return helpers.show_result_fail("")
+			select_id=operate_type
+			select = Rcs_Parameter_Select.query.filter_by(tree_id=p_id).all()
+			for obj in select:
+				if name==obj.name and str(select_id)!=str(obj.id):
+					return helpers.show_result_success("")
+			else:
+				return helpers.show_result_fail("")
