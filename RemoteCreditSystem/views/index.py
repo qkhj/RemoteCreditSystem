@@ -959,7 +959,6 @@ def auth_test_save():
     companyCode = request.form['companyCode']
     httpClient = None
     content=''
-    print "-----1"
     try:
         params = urllib.urlencode({'companyCode': companyCode})
         headers = {"Content-type": "application/x-www-form-urlencoded"
@@ -971,9 +970,7 @@ def auth_test_save():
         if "errorcode" in response or response is None:  
             flash('授权失败','error')
         else:
-            print "-----2"
             content = json.loads(response)
-            print "-----3"
             flash('授权成功','success')
     except:
         logger.exception('exception')
