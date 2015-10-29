@@ -19,6 +19,8 @@
 		    <menu id="030030" code="sxpg" name="授信评估" url="mxpg/sxpg/1" img="" operations="create|change|browse"/>
 		    <menu id="030040" code="pgbg" name="评估报告" url="mxpg/pgbg/1" img="" operations="create|change|browse"/>
 		    <menu id="030050" code="csgl" name="参数管理" url="mxpg/csgl" img="" operations="create|change|browse"/>
+		    <menu id="030060" code="interface_test" name="接口调试---机构同步" url="interface_test" img="" operations="create|change|browse"/>
+		    <menu id="030070" code="auth_test" name="接口调试---授权" url="auth_test" img="" operations="create|change|browse"/>
 		</menu>
 		
 		<menu id="040000" code="khzldy" name="客户资料调阅" url="" img="" operations="" index="4">

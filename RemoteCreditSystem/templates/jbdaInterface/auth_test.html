@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+		<link href="/static/css/main.css" rel="stylesheet" type="text/css" />
+		<link href="/static/css/bootstrap.css" rel="stylesheet">
+
+		<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+		<script src="../../../static/js/index.js"></script>
+
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body onload="setTimeOut();">
+		<div class="position">
+			当前位置：<span>接口测试</span>
+		</div>
+
+		<form name="submitForm" id="submitForm" action="/auth_test_save" method="POST">
+		<div class="content">
+{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
+			<table class="myTable">
+				<caption>授权</caption>
+				<colgroup>
+					<col width="10%">
+					<col width="40%">
+					<col width="10%">
+					<col width="40%">
+				</colgroup>
+				<tr>
+					<td class="table-label">公司代码</td>
+					<td><input type="text" id="companyCode" name="companyCode" /></td>
+							
+				</tr>	
+				<tr>
+					<td class="table-label">授权结果</td>
+					<td>{{content}}</td>
+							
+				</tr>			
+
+			</table>	
+			<div class="pagebar">			
+				<div class="controlbtn">
+					<input class="btn btn-info" href="javascript:void(0);" type="submit" value="授权登录"></input>
+				</div>
+			</div>
+		</div>
+	</form>
+		<script type="text/javascript">
+
+		</script>
+	</body>
+</html>

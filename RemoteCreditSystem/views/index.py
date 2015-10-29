@@ -1,5 +1,6 @@
 # coding:utf-8
 import hashlib
+import httplib, urllib,json
 
 from RemoteCreditSystem import User
 from RemoteCreditSystem.models import Org
@@ -33,6 +34,7 @@ from RemoteCreditSystem.tools.SimpleCache import SimpleCache
 
 from RemoteCreditSystem.models import Rcs_Application_Log,Rcs_Application_Absent,Rcs_Expert_Refuse
 
+from RemoteCreditSystem.models import OrgTest
 
 #get md5 of a input string
 def GetStringMD5(str):
@@ -902,3 +904,81 @@ def show_zjjxgl():
 @login_required
 def re_bigdata():
     return redirect('http://192.168.1.137:8080/jbda/home/loginTest.do?userName=test&userPwd=test')
+
+#接口调试---新增机构页面
+@app.route('/interface_test',methods=['GET', 'POST'])
+def interface_test():
+    return render_template("jbdaInterface/interface_test.html")
+
+#接口调试---机构保存
+@app.route('/interface_test_save',methods=['GET', 'POST'])
+def interface_test_save():
+    companyName = request.form['companyName']
+    companyAbbr = request.form['companyAbbr']
+    contactPhone = request.form['contactPhone']
+    filingNumber = request.form['filingNumber']
+    companyAddress = request.form['companyAddress']
+
+    httpClient = None
+    try:
+        params = urllib.urlencode({'companyName': companyName, 'companyAbbr': companyAbbr,'contactPhone': contactPhone,
+            'filingNumber': filingNumber,'companyAddress': companyAddress})
+        headers = {"Content-type": "application/x-www-form-urlencoded"
+                        , "Accept": "text/plain"}
+     
+        httpClient = httplib.HTTPConnection("192.168.1.110", 8080, timeout=30)
+        httpClient.request("POST", "/PCCredit/ipad/customerInfor/insert.json", params, headers)
+        response = httpClient.getresponse().read()
+        if "errorcode" in response or response is None:  
+            flash('同步失败','error')
+        else:
+            content = json.loads(response)
+            #返回状态
+            org_status = content["status"].encode("utf-8")
+            if str(org_status)=='0':
+                byCompanyCode = content["byCompanyCode"].encode("utf-8")
+                OrgTest(companyName,companyAbbr,contactPhone,filingNumber,companyAddress,byCompanyCode).add()
+                db.session.commit()
+                flash('同步成功','success')
+    except:
+        logger.exception('exception')
+    finally:
+        if httpClient:
+            httpClient.close()
+
+    return render_template("jbdaInterface/interface_test.html")
+
+#接口调试---授权页面
+@app.route('/auth_test',methods=['GET', 'POST'])
+def auth_test():
+    return render_template("jbdaInterface/auth_test.html")
+
+#接口调试---授权页面保存
+@app.route('/auth_test_save',methods=['GET', 'POST'])
+def auth_test_save():
+    companyCode = request.form['companyCode']
+    httpClient = None
+    content=''
+    print "-----1"
+    try:
+        params = urllib.urlencode({'companyCode': companyCode})
+        headers = {"Content-type": "application/x-www-form-urlencoded"
+                        , "Accept": "text/plain"}
+     
+        httpClient = httplib.HTTPConnection("192.168.1.110", 8080, timeout=30)
+        httpClient.request("POST", "/PCCredit/ipad/customerInfor/insert.json", params, headers)
+        response = httpClient.getresponse().read()
+        if "errorcode" in response or response is None:  
+            flash('授权失败','error')
+        else:
+            print "-----2"
+            content = json.loads(response)
+            print "-----3"
+            flash('授权成功','success')
+    except:
+        logger.exception('exception')
+    finally:
+        if httpClient:
+            httpClient.close()
+
+    return render_template("jbdaInterface/auth_test.html",content=content)
