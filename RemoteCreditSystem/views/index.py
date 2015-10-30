@@ -926,7 +926,7 @@ def interface_test_save():
         headers = {"Content-type": "application/x-www-form-urlencoded"
                         , "Accept": "text/plain"}
      
-        httpClient = httplib.HTTPConnection("192.168.1.110", 8080, timeout=30)
+        httpClient = httplib.HTTPConnection("139.196.50.242", 80, timeout=30)
         httpClient.request("POST", "/PCCredit/ipad/customerInfor/insert.json", params, headers)
         response = httpClient.getresponse().read()
         if "errorcode" in response or response is None:  
@@ -964,7 +964,7 @@ def auth_test_save():
         headers = {"Content-type": "application/x-www-form-urlencoded"
                         , "Accept": "text/plain"}
      
-        httpClient = httplib.HTTPConnection("192.168.1.110", 8080, timeout=30)
+        httpClient = httplib.HTTPConnection("139.196.50.242", 80, timeout=30)
         httpClient.request("POST", "/PCCredit/ipad/customerInfor/insert.json", params, headers)
         response = httpClient.getresponse().read()
         if "errorcode" in response or response is None:  
