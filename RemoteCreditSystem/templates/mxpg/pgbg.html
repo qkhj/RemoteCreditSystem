@@ -54,10 +54,9 @@
 					<col width="10%" />
 					<col width="10%" />
 					<col width="10%" />
+					<col width="15%" />
 					<col width="5%" />
-					<col width="5%" />
-					<col width="10%" />
-					<col width="5%" />
+
 				</colgroup>
 				<tr>
 					<th></th>
@@ -70,8 +69,7 @@
 					<th>行业</th>
 					<th>商圈</th>
 					<th>客户经理</th>
-					<th>审核人</th>
-					<th>审批人</th>
+		
 				</tr>
 			</table>
 			<table class="table-list">
@@ -83,10 +81,9 @@
 					<col width="10%" />
 					<col width="10%" />
 					<col width="10%" />
+					<col width="15%" />
 					<col width="5%" />
-					<col width="5%" />
-					<col width="10%" />
-					<col width="5%" />
+		
 				</colgroup>
 				{%- for obj in appList.items%}
 				<tr onclick="checkTable(this)">
@@ -98,10 +95,9 @@
 					<td>{{obj.approve_org}}</td>
 					<td>{{obj.approve_area}}</td>
 					<td>{{obj.industry}}</td>
-					<td>{{obj.district}}</td>
+					<td>{{obj.create_time}}</td>
 					<td>{{obj.user_name}}</td>
-					<td>{{obj.sh_name}}</td>
-					<td>{{obj.sp_name}}</td>
+			
 				</tr>
 				{%-endfor%}
 			</table>

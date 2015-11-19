@@ -55,9 +55,19 @@
 				<tr>
 					<td class="table-label">授信结果</td>
 					<td><select id="result" name="result" value="{{rcs.approve_result}}">
-							<option value="1">同意发放</option>
-							<option value="2">拒绝发放</option>
+						{%- if rcs.approve_result==1%}
+							<option value="1" selected>同意发放</option>
+							<option value="2"  >拒绝发放</option>
 							<option value="3">补充调查</option>
+						{%- elif rcs.approve_result==2%}
+							<option value="1" >同意发放</option>
+							<option value="2" selected >拒绝发放</option>
+							<option value="3">补充调查</option>
+						{%- else%}
+							<option value="1" >同意发放</option>
+							<option value="2"  >拒绝发放</option>
+							<option value="3" selected>补充调查</option>
+						{%- endif%}
 					</td>
 					<td class="table-label">授信额度</td>
 					<td><input type="text" id="je" name="je" value="{{rcs.approve_ed}}">元</td>					

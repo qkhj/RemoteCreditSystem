@@ -228,7 +228,7 @@ def jjfa(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"    
     #获取未分类数据   
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("jjrwfa/jjfa.html",appList=appList,current_user=current_user,count=count)
 
@@ -363,7 +363,7 @@ def pldr(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"    
     #获取未分类数据   
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("mxpg/pldr.html",appList=appList,count=count)
 
@@ -379,7 +379,7 @@ def xxlr(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"
     #获取未分类数据   
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     length = len(Rcs_Application_Info.query.filter(sql).all())
     for obj in appList.items:
         if not obj.model_type:
@@ -401,7 +401,8 @@ def sxpg(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"
     #获取未分类数据     
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)   
+    print sql
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE) 
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("mxpg/sxpg.html",appList=appList,customer_name=customer_name,card_id=card_id,count=count)
 
@@ -420,7 +421,7 @@ def pgbg(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"   
     #获取未分类数据     
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("mxpg/pgbg.html",appList=appList,customer_name=customer_name,card_id=card_id,count=count)
 
@@ -477,7 +478,7 @@ def khzl(page):
         if card_id:
             sql+=" and card_id='"+card_id+"'"    
     #获取未分类数据   
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("khzldy/khzl.html",appList=appList,count=count)
 
@@ -523,7 +524,7 @@ def yjsrw(page):
             sql+=" and customer_name like '%"+customer_name+"%'"
         if card_id:
             sql+=" and card_id='"+card_id+"'"  
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("zjzxpggl/yjsrw.html",appList=appList,count=count)
 
@@ -612,7 +613,7 @@ def pgjl(page):
             sql+=" and customer_name like '%"+customer_name+"%'"
         if card_id:
             sql+=" and card_id='"+card_id+"'"  
-    appList = Rcs_Application_Info.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    appList = Rcs_Application_Info.query.filter(sql).order_by("create_time desc").paginate(page, per_page = PER_PAGE)
     count = len(Rcs_Application_Info.query.filter(sql).all())
     return render_template("zxpgjl/pgjl.html",appList=appList,count=count)
 #评估结果

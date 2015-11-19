@@ -238,8 +238,8 @@ def open_excel(excel_id,ABS_uri,info):
               SC_Excel_Table_Content(info.id,excel_id,table_content,excel_dict['建议']['name'],excel_dict['建议']['code']).add()
               break   
       for d,x in excel_dict.items():
-          #print "key:"+d+",value:"+x
           if d != '建议':
+
               for index,sheet in enumerate(data.sheets()):
                   #print sheet.name #sheet名称
                   if sheet.name.replace(' ','') == d.replace(' ',''):
