@@ -668,7 +668,7 @@
 					<td class="tdCenter"><input type="text" name="N29" value="0" readonly/></td>
 					<td class="tdCenter"><input type="text" name="O29" value="0" readonly/></td>
 					<td class="tdCenter"><input type="text" name="P29" value="0" readonly/></td>
-					<td class="tdCenter"><input type="text" name="Q29" value="0" readonly/></td>
+					<td class="tdCenter"><input type="text" name="Q29" id="Q29" value="0" readonly/></td>
 				</tr>
 			</table>
 		
@@ -742,7 +742,7 @@
 				// 前端验证 
 				if($('#form_id').validationEngine('validate')){
 					//获取小微贷月可支值（还款能力）
-					var month_value = document.getElementById("Q24").value;
+					var month_value = document.getElementById("Q29").value;
 					//submit
 					var b = new Base64(); 
 					updateAllDOMFields(document.getElementById("form_id"));
